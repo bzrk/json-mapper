@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Bzrk\JsonMapper;
 
+/**
+ * @template T
+ */
 class JsonType
 {
     private const TYPE_LIST = 'list';
@@ -36,6 +39,7 @@ class JsonType
 
     /**
      * @throws JsonMapperException
+     * @param class-string<T> $className
      */
     public static function listOf(string $className) : self {
         return new self(self::TYPE_LIST, $className);
@@ -43,6 +47,7 @@ class JsonType
 
     /**
      * @throws JsonMapperException
+     * @param class-string<T> $className
      */
     public static function instanceOf(string $className) : self {
         return new self(self::TYPE_INSTANCE, $className);

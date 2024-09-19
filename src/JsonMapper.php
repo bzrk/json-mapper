@@ -17,8 +17,21 @@ class JsonMapper
 
     /**
      * @throws JsonMapperException
+     * @template T
+     * @param class-string<T> $className
+     * @return T[]
      */
-    public function fromString(string $json, JsonType $type): object|array {
-        return (new JsonDeSerializer($json, $type))->deserialize();
+    public function listFromString(string $json, string $className): array {
+        return (new JsonDeSerializer($json, JsonType::listOf($className)))->deserialize();
+    }
+
+    /**
+     * @throws JsonMapperException
+     * @template T
+     * @param class-string<T> $className
+     * @return T
+     */
+    public function objectFromString(string $json, string $className): object {
+        return (new JsonDeSerializer($json, JsonType::instanceOf($className)))->deserialize();
     }
 }
