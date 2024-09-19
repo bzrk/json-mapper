@@ -24,7 +24,7 @@ class PropertyHydrator
         $name = $jsonProperty->name($property->name);
         $value = $this->value($jsonProperty, $property, $object->{$name} ?? null);
 
-        return new JsonValue($name, $value);
+        return new JsonValue($property->name, $value);
     }
 
     /**
