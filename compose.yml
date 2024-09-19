@@ -1,0 +1,9 @@
+services:
+  app:
+    image: json-mapper-php
+    build: .
+    container_name: json_mapper_php
+    working_dir: "${PWD}"
+    volumes:
+      - "${PWD}:${PWD}"
+    user: "1000:1000"
