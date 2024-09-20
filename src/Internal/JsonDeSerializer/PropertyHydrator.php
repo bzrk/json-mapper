@@ -40,7 +40,7 @@ class PropertyHydrator
         }
 
         $propertyType = $property->getType()->getName();
-        $allowedTypes = ['float','bool','string','array'];
+        $allowedTypes = ['int','float','bool','string','array'];
 
         if(!(in_array($propertyType, $allowedTypes) || $propertyType !== 'object')) {
             throw new JsonMapperException("type $propertyType of $property->name is not allowed");
@@ -54,7 +54,7 @@ class PropertyHydrator
         }
 
         if(is_scalar($value)) {
-            $valueType = gettype($value);
+            $valueType = $this->mapSimpleTypes(gettype($value));
             if($valueType === $propertyType) {
                 return $value;
             }
@@ -76,5 +76,14 @@ class PropertyHydrator
         }
 
         return null;
+    }
+
+    private function mapSimpleTypes(string $type):  string {
+        return match ($type) {
+            'double' => 'float',
+            'boolean' => 'bool',
+            'integer' => 'int',
+            default => $type,
+        };
     }
 }

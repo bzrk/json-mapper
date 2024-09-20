@@ -35,7 +35,7 @@ class ObjectArrayHydrator
             return $this->hydrateObject($type->class, $this->data);
         } catch (Throwable $throwable) {
             throw new JsonMapperException(
-                message: 'Can\'t serialize',
+                message: 'Can\'t deserialize',
                 previous: $throwable
             );
         }
